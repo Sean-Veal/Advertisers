@@ -20,8 +20,13 @@ public class AdvertisersApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        System.out.println(advertiserRepository.getAllAdvertisers().toString());
+        //TODO: REMOVE SYSOUT AFTER COMPLETETION
         System.out.println(advertiserRepository.insert(new Advertiser("Batman",
                 "Bruce Wayne", 300.00)));
+        System.out.println(advertiserRepository.update(new Advertiser("Batman",
+                "Bruce Wayne", 1000.00)));
+        System.out.println(advertiserRepository.getAdvertiser("Batman").toString());
+        System.out.println(advertiserRepository.delete("Batman"));
+
     }
 }

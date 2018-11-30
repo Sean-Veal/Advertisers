@@ -6,10 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/advertiser")
@@ -21,13 +18,49 @@ public class AdvertiserController {
     @RequestMapping(method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> createAdvertiser(@RequestBody Advertiser createdAdvertiser) {
-        System.out.println("Advertiser!!!!!!!!!!!!!!" + createdAdvertiser.toString());
+    public ResponseEntity<Advertiser> createAdvertiser(@RequestBody Advertiser createdAdvertiser) {
         Integer success = advertiserRepository.insert(createdAdvertiser);
 
         if (success != 0)
-            return new ResponseEntity<>(HttpStatus.CREATED);
+            return new ResponseEntity<>(createdAdvertiser, HttpStatus.CREATED);
 
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    @RequestMapping(method = RequestMethod.PUT,
+                    consumes = MediaType.APPLICATION_JSON_VALUE,
+                    produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> updateAdvertiser(@RequestBody Advertiser updatedAdvertiser) {
+        Integer success = advertiserRepository.update(updatedAdvertiser);
+
+        switch(success) {
+            case 0: return new ResponseEntity<>(HttpStatus.CREATED);
+            case 1: return new ResponseEntity<>(HttpStatus.OK);
+        }
+
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    @RequestMapping(method = RequestMethod.DELETE,
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> deleteAdvertiser(@RequestBody Advertiser deletedAdvertiser) {
+        Integer success = advertiserRepository.delete(deletedAdvertiser.getAdvertiserName());
+
+        if (success != 0)
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    @RequestMapping(method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Advertiser> getAdvertiser(@RequestParam("advertiserName") String advertiserName) {
+        Advertiser retrievedAdvertiser = advertiserRepository.getAdvertiser(advertiserName);
+        if (retrievedAdvertiser != null)
+            return new ResponseEntity<>(retrievedAdvertiser, HttpStatus.OK);
+
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
     }
 }
