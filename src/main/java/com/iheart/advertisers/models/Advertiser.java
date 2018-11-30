@@ -1,8 +1,22 @@
 package com.iheart.advertisers.models;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class Advertiser {
+
+    @NotNull
+    @NotBlank
+    @Size(min = 1, max = 300)
     private String advertiserName;
+
+    @NotNull
+    @NotBlank
+    @Size(min = 1, max = 300)
     private String contactName;
+
+    @NotNull
     private Double creditLimit;
 
     public Advertiser() {}
