@@ -63,4 +63,12 @@ public class AdvertiserController {
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
     }
+
+    @ExceptionHandler
+    public ResponseEntity<String> advertiserException(Exception e) {
+
+        return new ResponseEntity<>("Error With Advertiser Request", HttpStatus.CONFLICT);
+    }
+
+
 }
