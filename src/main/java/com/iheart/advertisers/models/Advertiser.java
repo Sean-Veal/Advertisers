@@ -5,18 +5,20 @@ public class Advertiser {
     private String contactName;
     private Double creditLimit;
 
+    public Advertiser() {}
+
     public Advertiser(String advertiserName, String contactName, Double creditLimit) {
         this.advertiserName = advertiserName;
         this.contactName = contactName;
         this.creditLimit = creditLimit;
     }
 
-    public String getName() {
+    public String getAdvertiserName() {
         return advertiserName;
     }
 
-    public void setName(String name) {
-        this.advertiserName = name;
+    public void setAdvertiserName(String advertiserName) {
+        this.advertiserName = advertiserName;
     }
 
     public String getContactName() {
@@ -38,7 +40,7 @@ public class Advertiser {
     @Override
     public String toString() {
         return "Advertiser{" +
-                "name='" + advertiserName + '\'' +
+                "advertiserName='" + advertiserName + '\'' +
                 ", contactName='" + contactName + '\'' +
                 ", creditLimit=" + creditLimit +
                 '}';
