@@ -59,7 +59,6 @@ public class AdvertiserController {
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
-    //TODO: Update if you can figure out how to add an ID
     @RequestMapping(method = RequestMethod.DELETE,
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
@@ -75,7 +74,6 @@ public class AdvertiserController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    //TODO: Update if you can figure out how to add an ID
     @RequestMapping(method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation("Retrieves Advertiser based on advertiserName. Returns 404 if process can't be completed.")

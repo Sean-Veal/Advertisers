@@ -14,6 +14,7 @@ apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
+apply plugin: 'jacoco'
 
 group = 'com.iheart'
 version = '0.0.1-SNAPSHOT'
@@ -23,6 +24,18 @@ repositories {
     mavenCentral()
 }
 
+jacoco {
+    toolVersion = "0.8.2"
+    reportsDir = file("$buildDir/customJacocoReportDir")
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled false
+        csv.enabled false
+        html.destination file("${buildDir}/jacocoHtml")
+    }
+}
 
 dependencies {
     implementation('org.springframework.boot:spring-boot-starter-actuator')
